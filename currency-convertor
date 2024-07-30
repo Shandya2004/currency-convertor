@@ -1,0 +1,40 @@
+ef convert_currency(amount, from_currency, to_currency, exchange_rates):
+  """Converts the given amount from one currency to another.
+
+  Args:
+      amount: The amount to convert (float).
+      from_currency: The currency code to convert from (e.g., USD, EUR).
+      to_currency: The currency code to convert to (e.g., JPY, CHF).
+      exchange_rates: A dictionary containing exchange rates (e.g., {"USD": {"EUR": 0.9}, "EUR": {"JPY": 129.7}}).
+
+  Returns:
+      The converted amount as a float, or None if an error occurs.
+  """
+  if from_currency not in exchange_rates or to_currency not in exchange_rates[from_currency]:
+    return None
+  return amount * exchange_rates[from_currency][to_currency]
+
+# Define exchange rates (replace with your desired rates)
+exchange_rates = {
+  "USD": {"EUR": 0.9, "JPY": 134.2},
+  "EUR": {"JPY": 129.7},
+}
+
+# Main program loop4
+while True:
+  print("\nCurrency Converter (Static Rates)")
+  from_currency = input("Enter the currency to convert from (e.g., USD, EUR): ").upper()
+  to_currency = input("Enter the currency to convert to (e.g., JPY, CHF): ").upper()
+  amount = float(input("Enter the amount to convert: "))
+
+  converted_amount = convert_currency(amount, from_currency, to_currency, exchange_rates)
+  if converted_amount is None:
+    print("Error: Invalid currency or missing exchange rate.")
+  else:
+    print(f"{amount} {from_currency} is equivalent to approximately {converted_amount:.2f} {to_currency}.")
+
+  choice = input("Do you want to convert again? (y/n): ").lower()
+  if choice != 'y':
+    break
+
+print("Exiting the currency converter.")
